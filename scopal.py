@@ -1,6 +1,6 @@
 # By: incognybble
 # Created: 4th Sept 2015
-# Last modified: 13th Nov 2015
+# Last modified: 4th Dec 2015
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -9,6 +9,7 @@ import time
 import re
 #from datetime import datetime
 import getpass
+
 
 PAUSE = 5
 
@@ -42,24 +43,31 @@ class scopal():
         self.type_in_name("h_password", self.p)
         self.click_by_attr("input", "value", "Log in")
 
-        if self.card != "":
-            self.select_by_id("selectCardIndex", self.card)
+        # check for error message
+        if (not self.check_in_source("username or password does not match") and not self.check_in_source("account is blocked")):
 
-        self.click_by_link_text("Opal activity")
+            if self.card != "":
+                self.select_by_id("selectCardIndex", self.card)
 
-        # strip data from source
-        cont = self.get_data()
-        
-        # click the next one if possible
-        while self.check_in_source("Next page") and cont == True:
-            self.click_by_id("next")
+            self.click_by_link_text("Opal activity")
+
+            # strip data from source
             cont = self.get_data()
+            
+            # click the next one if possible
+            while self.check_in_source("Next page") and cont == True:
+                self.click_by_id("next")
+                cont = self.get_data()
 
-        self.click_by_link_text("Log Out")
-        self.browser.switch_to.alert.accept()
-        time.sleep(PAUSE)
-        self.browser.switch_to_window(self.main_window)
-        self.browser.close()
+            self.click_by_link_text("Log Out")
+            self.browser.switch_to.alert.accept()
+            time.sleep(PAUSE)
+            self.browser.switch_to_window(self.main_window)
+            
+        else:
+            print "Try different username/password."
+            
+        self.browser.quit()
 
     def get_data(self):
         tbody = re.findall('<tbody.+?tbody', self.browser.page_source, re.DOTALL)
@@ -170,8 +178,15 @@ class scopal():
         time.sleep(PAUSE)
 
 if __name__ == "__main__":
-    username = raw_input("Username: ")
-    p = getpass.getpass("Pass: ")
+    username = ''
+    p = ''
+
+    while len(username.strip()) == 0:
+        username = raw_input("Username: ")
+
+    while len(p.strip()) == 0:
+        p = getpass.getpass("Pass: ")
+        
     card = raw_input("Card (optional): ")
     stop = raw_input("Stop (optional): ")
     filename = raw_input("Output file (optional): ")
