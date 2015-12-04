@@ -2,20 +2,24 @@
 
 This program is used to collect your own data from the Opal website https://www.opal.com.au/ .
 
-While the website does allow you to download your own data in PDF, it isn't particularly useful if you want to do some analysis on the data. This code saves your data in CSV. Currently uses the Firefox browser.
+While the website does allow you to download your own data in PDF, it isn't particularly useful if you want to do some analysis on the data. This code saves your data in CSV. Works in Firefox and Chrome. Default option is Firefox.
+
+I've only tested this on Windows.
 
 ## Requirements
 * Python 2.7
 * Selenium library https://pypi.python.org/pypi/selenium
-* Firefox
+* Firefox or Chrome and ChromeDriver https://sites.google.com/a/chromium.org/chromedriver/downloads
 * Opal account with linked card
 
 ## Usage
-If compiling the code into an executable, the webdriver files for the browser will need to be copied into the same folder as the executable.
+If compiling the code into an executable and using Firefox, the webdriver files for the browser will need to be copied into the same folder as the executable. Webdriver files are webdriver.xpi and webdriver_prefs.json
+
+If using Chrome, the ChromeDriver address needed to be in the system's PATH variable. I put the ChromeDriver executable in C:\Python27\Scripts
 
 When the code is run, it will ask for several user inputs.
-* username - your username to log into your Opal account
-* password - your password to log into your Opal account
+* username - your username to log into your Opal account. Cannot be blank.
+* password - your password to log into your Opal account. Cannot be blank.
 * card - the name of the card that the data is collected from. This field is optional, and is more useful when you have multiple cards linked to the same account.
 * stop - the unique trip id where the code should stop collecting data. This field is optional, and is more useful if some data has been collected before. This saves you from having to recollect data.
 * output file - the location and filename of the output. This field is optional, and by default the output file is opal.csv

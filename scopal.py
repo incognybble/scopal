@@ -15,8 +15,15 @@ PAUSE = 5
 
 class scopal():
 
-    def __init__(self, username, p, stop='', card="", filename=''):
-        self.browser = webdriver.Firefox()
+    def __init__(self, username, p, stop='', card="", filename='', b=''):
+        
+        self.browser = None
+        
+        if (b.strip()=="2" or b.strip().lower()=="chrome"):
+            self.browser = webdriver.Chrome()
+        else:
+            self.browser = webdriver.Firefox()
+            
         self.homepage = "https://www.opal.com.au/"
         self.username = username
         self.p = p
@@ -190,6 +197,8 @@ if __name__ == "__main__":
     card = raw_input("Card (optional): ")
     stop = raw_input("Stop (optional): ")
     filename = raw_input("Output file (optional): ")
+
+    b = raw_input("Browser (optional)\n[1] Firefox (default)\n[2] Chrome: ")
         
-    o = scopal(username, p, stop, card, filename)
+    o = scopal(username, p, stop, card, filename, b)
     o.run()
