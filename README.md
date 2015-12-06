@@ -22,7 +22,8 @@ When the code is run, it will ask for several user inputs.
 * password - your password to log into your Opal account. Cannot be blank.
 * card - the name of the card that the data is collected from. This field is optional, and is more useful when you have multiple cards linked to the same account.
 * stop - the unique trip id where the code should stop collecting data. This field is optional, and is more useful if some data has been collected before. This saves you from having to recollect data.
-* output file - the location and filename of the output. This field is optional, and by default the output file is opal.csv
+* output file - the location and filename of the output file. This field is optional, and by default the output file is opal.csv
+* browser - the browser you want to use. This field is optional. Firefox is the default.
 
 Your username and password are not stored, and are just used to login to get the data. Consequently, each time you run the code, you will need to re-enter your details.
 
