@@ -4,7 +4,9 @@ This program is used to collect your own data from the Opal website https://www.
 
 While the website does allow you to download your own data in PDF, it isn't particularly useful if you want to do some analysis on the data. This code saves your data in CSV. Works in Firefox and Chrome. Default option is Firefox.
 
-I've only tested this on Windows.
+## Compatibility
+* Windows - confirmed with both Firefox and Chrome.
+* Linux - confirmed with Firefox.
 
 ## Requirements
 * Python 2.7
