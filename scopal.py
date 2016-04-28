@@ -1,6 +1,6 @@
 # By: incognybble
 # Created: 4th Sept 2015
-# Last modified: 4th Dec 2015
+# Last modified: 28th Apr 2016
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -139,6 +139,15 @@ class scopal():
             to = ""
         else:
             (fr, to) = where.split(" to ")
+
+        if (fr.endswith("LR")) and (mode == "train"):
+            mode = "light rail"
+            fr = fr.replace(" LR", "")
+            if to.endswith("LR"):
+                to = to.replace(" LR", "")
+        elif (to.endswith("LR")) and (mode == "train"):
+            mode = "light rail"
+            to = to.replace(" LR", "")
 
         if fr.find(",") > -1:
             fr = '"' + fr + '"'
