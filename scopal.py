@@ -98,7 +98,7 @@ class scopal():
             raise Exception("Could not find rows")
         
         for row in rows:
-            data = re.findall('<td.*?>(\d+)</td><td class="date-time">([\w\s:\/]+)</td>.+?alt="([\w\s]+)".+?transaction-summary hyphenate.+?>([\w\s\-\&,\.]+)<.+?center">([\d\s]*?)</td><td>(.*?)</td>.+?(\-?\$\d+\.\d+).+?(\-?\$\d+\.\d+).+?(\-?\$\d+\.\d+)', row)
+            data = re.findall('<td.*?>(\d+)</td><td class="date-time">([\w\s:\/]+)</td>.+?alt="([\w\s]+)".+?transaction-summary hyphenate.+?>([\w\s\-\&,\.\(\)]+)<.+?center">([\d\s]*?)</td><td>(.*?)</td>.+?(\-?\$\d+\.\d+).+?(\-?\$\d+\.\d+).+?(\-?\$\d+\.\d+)', row)
 
             if len(data) == 0:
                 print row
