@@ -1,6 +1,6 @@
 # By: incognybble
 # Created: 4th Sept 2015
-# Last modified: 28th Apr 2016
+# Last modified: 20th Aug 2016
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -87,7 +87,7 @@ class scopal():
         tbody = re.sub('<img .+?alt="(?P<mode>\w+)" .+?>', '<img alt="\g<mode>" />',tbody)
         tbody = re.sub("[\s\n\t]+", " ", tbody)
         tbody = re.sub("\xad", "", tbody)
-        tbody = re.sub('(?P<time>\d+:\d+)</td><td class="center"></td>', '\g<time></td><td class="center"><img alt="top up" /></td>', tbody)
+        tbody = re.sub('(?P<time>\d+:\d+)</td><td class="center"></td>', '\g<time></td><td class="center"><img alt="blank" /></td>', tbody)
         tbody = re.sub('nowrap"></td>', 'nowrap">$0.00</td>', tbody)
         tbody = re.sub("&amp;", "&", tbody)
         
@@ -130,9 +130,15 @@ class scopal():
         s = idn + ","
         s = s + d[0] + "," + d[1] + "," + d[2] + ","
         
-        if mode == "top up":
-            fr = where.replace("Top up - ", "")
-            to = ""
+        if mode == "blank":
+            if where.startswith("Top up"):
+                mode = "top up"
+                fr = where.replace("Top up - ", "")
+                to = ""
+            else:
+                mode = ""
+                fr = where
+                to = ""
         elif where.startswith("Tap on reversal"):
             notes = "Tap on reversal"
             fr = where.replace("Tap on reversal - ", "")
